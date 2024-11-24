@@ -1,0 +1,26 @@
+Prefix pipelines/SINCERA/
+Plugin FilterLowQualityCells inputfile parameters/parameters.filterLQ.txt outputfile filtered.rds
+Plugin MinExpress inputfile filtered.rds outputfile minexpress.rds
+Plugin Distribution inputfile minexpress.rds outputfile distribution.pdf
+Plugin FilterNonExpressed inputfile distribution.pdf.rds outputfile expressed.rds
+Plugin ZScoreScale inputfile expressed.rds outputfile zscorescale.rds
+Plugin PCASD inputfile zscorescale.rds outputfile PCASD
+Plugin PCATSNE inputfile PCASD.rds outputfile PCATSNE
+Plugin Specificity inputfile parameters/parameters.specificity.txt outputfile Specific.rds
+Plugin Hierarchical inputfile parameters/parameters.hierarchical.txt outputfile Hierarchical
+Plugin Radial inputfile parameters/parameters.hierarchical.txt outputfile Radial
+Plugin Dendogram inputfile parameters/parameters.hierarchical.txt outputfile Dendogram
+Plugin PlotMarker inputfile parameters/iter1/parameters.markers.1.txt outputfile Marker1.pdf
+Plugin PlotMarker inputfile parameters/iter1/parameters.markers.2.txt outputfile Marker2.pdf
+Plugin PlotMarker inputfile parameters/iter1/parameters.markers.3.txt outputfile Marker3.pdf
+Plugin MergeClusters inputfile parameters/parameters.mergeclusters.txt outputfile Merged.rds
+Plugin Welch inputfile Merged.rds outputfile Welch.rds
+Plugin RankAggregation inputfile parameters/parameters.rankaggregate.txt outputfile RankAggregate.rds
+
+# Iteration 2
+Plugin Unique inputfile RankAggregate.rds outputfile Unique.rds
+Plugin Hierarchical inputfile parameters/parameters.hierarchical.5.txt outputfile Hierarchical5
+Plugin PCATSNE inputfile Hierarchical5.rds outputfile PCATSNE.iteration2
+Plugin PlotMarker inputfile parameters/iter2/parameters.markers.1.txt outputfile Marker1.iter2.pdf
+Plugin PlotMarker inputfile parameters/iter2/parameters.markers.2.txt outputfile Marker2.iter2.pdf
+Plugin PlotMarker inputfile parameters/iter2/parameters.markers.3.txt outputfile Marker3.iter2.pdf
